@@ -1,0 +1,23 @@
+{
+  "name": "gardr-plugin-ext-postscribe",
+  "version": "0.1.0",
+  "author": "Krystian Jarmicki <krystian.jarmicki@schibsted.pl>",
+  "license": "MIT",
+  "description": "Gardr plugin for requesting replacement with Postscribe from inside of an iframe",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "dependencies": {
+    "gardr-core-plugin": "0.0.1",
+    "cross-domain-events": "^0.0.2"
+  },
+  "devDependencies": {
+    "sinon": "^1.9.1",
+    "mocha": "^1.19.0"
+  },
+  "keywords": [
+    "gardr",
+    "gardr-plugin"
+  ]
+}
