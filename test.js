@@ -50,18 +50,24 @@ describe('gardr-postscribe', function() {
         assert(global.eventHandlers.hasOwnProperty('DOMContentLoaded'), 'DOMContentLoaded unset');
     });
 
-    it('should not call postMessage (via xde) when _gardrPostscribe var is not true', function() {
+    it('should not call postMessage (via xde) when _gardrPostscribe var is not true', function(done) {
         gardrPostscribe(pluginApi);
         assert(!global.parent.postMessage.called, 'parent.postMessage was called');
         global.triggerEvent('DOMContentLoaded');
-        assert(!global.parent.postMessage.called, 'parent.postMessage was called');
+        setTimeout(function() {
+            assert(!global.parent.postMessage.called, 'parent.postMessage was called');
+            done();
+        }, 10);
     });
 
-    it('should call postMessage (via xde) when _gardrPostscribe var is true', function() {
+    it('should call postMessage (via xde) when _gardrPostscribe var is true', function(done) {
         global._gardrPostscribe = true;
         gardrPostscribe(pluginApi);
         assert(!global.parent.postMessage.called, 'parent.postMessage was called');
         global.triggerEvent('DOMContentLoaded');
-        assert(global.parent.postMessage.called, 'parent.postMessage was not called');
+        setTimeout(function() {
+            assert(global.parent.postMessage.called, 'parent.postMessage was not called');
+            done();
+        }, 10);
     });
 });
