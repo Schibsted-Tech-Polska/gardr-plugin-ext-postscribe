@@ -36,8 +36,10 @@ describe('gardr-postscribe', function() {
         pluginApi = new PluginApi();
         global.parent.postMessage = sinon.spy();
         global.gardr.id = '' + Math.random();
-        global._gardrPostscribe = false;
-        global.eventHandlers = {};
+        delete global._gardrPostscribe;
+        global._gardrRunPostscribe = function(getUrl) {
+            global._gardrRunPostscribe.getUrl = getUrl;
+        };
     });
     
     it('should be a function', function() {
@@ -62,6 +64,19 @@ describe('gardr-postscribe', function() {
 
     it('should call postMessage (via xde) when _gardrPostscribe var is true', function(done) {
         global._gardrPostscribe = true;
+        gardrPostscribe(pluginApi);
+        assert(!global.parent.postMessage.called, 'parent.postMessage was called');
+        global.triggerEvent('DOMContentLoaded');
+        setTimeout(function() {
+            assert(global.parent.postMessage.called, 'parent.postMessage was not called');
+            done();
+        }, 10);
+    });
+
+    it('should call postMessage (via xde) when _gardrRunPostscribe callback was set', function(done) {
+        global._gardrRunPostscribe(function() {
+            return 'yeah';
+        });
         gardrPostscribe(pluginApi);
         assert(!global.parent.postMessage.called, 'parent.postMessage was called');
         global.triggerEvent('DOMContentLoaded');

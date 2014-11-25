@@ -1,6 +1,6 @@
 {
   "name": "gardr-plugin-ext-postscribe",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "author": "Krystian Jarmicki <krystian.jarmicki@schibsted.pl>",
   "license": "MIT",
   "description": "Gardr plugin for requesting replacement with Postscribe from inside of an iframe",

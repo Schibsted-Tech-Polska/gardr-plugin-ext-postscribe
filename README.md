@@ -24,7 +24,11 @@ In your ext bundle file:
 
 ## Usage
 
-Set global variable ```_gardrPostscribe``` to ```true``` anywhere in script pointed by options.url
+Set global variable ```_gardrPostscribe``` to ```true``` anywhere in script pointed by options.url or declare a custom function: 
+```javascript
+_gardrRunPostscribe = function(getUrl) { 
+    _gardrRunPostscribe.getUrl = getUrl
+}```
 
 In host window:
 ```javascript
@@ -38,4 +42,10 @@ gardr.queue('ad', {
 In my-adserver.com/ad.js:
 ```javascript
 window._gardrPostscribe = true;
+```
+or
+```javascript
+window._gardrRunPostscribe(function() {
+    return 'http://www.url.to.ad'
+});
 ```
