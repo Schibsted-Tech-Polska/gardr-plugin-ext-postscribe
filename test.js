@@ -37,8 +37,8 @@ describe('gardr-postscribe', function() {
         global.parent.postMessage = sinon.spy();
         global.gardr.id = '' + Math.random();
         delete global._gardrPostscribe;
-        global._gardrRunPostscribe = function(getUrl) {
-            global._gardrRunPostscribe.getUrl = getUrl;
+        global._gardrRunPostscribe = function(getHTML) {
+            global._gardrRunPostscribe.getHTML = getHTML;
         };
     });
     
@@ -75,7 +75,7 @@ describe('gardr-postscribe', function() {
 
     it('should call postMessage (via xde) when _gardrRunPostscribe callback was set', function(done) {
         global._gardrRunPostscribe(function() {
-            return 'yeah';
+            return '<script src="yeah"></script>';
         });
         gardrPostscribe(pluginApi);
         assert(!global.parent.postMessage.called, 'parent.postMessage was called');

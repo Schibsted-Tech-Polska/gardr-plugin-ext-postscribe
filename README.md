@@ -26,8 +26,8 @@ In your ext bundle file:
 
 Set global variable ```_gardrPostscribe``` to ```true``` anywhere in script pointed by options.url or declare a custom function: 
 ```javascript
-_gardrRunPostscribe = function(getUrl) { 
-    _gardrRunPostscribe.getUrl = getUrl
+_gardrRunPostscribe = function(getHTML) { 
+    _gardrRunPostscribe.getHTML = getHTML
 }```
 
 In host window:
@@ -46,6 +46,6 @@ window._gardrPostscribe = true;
 or
 ```javascript
 window._gardrRunPostscribe(function() {
-    return 'http://www.url.to.ad'
+    return '<script src="http://www.url.to.ad"></script>';
 });
 ```
